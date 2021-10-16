@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.fragments.source
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -20,11 +21,7 @@ class SourcesFragment : BaseFragment<FragmentSourcesBinding, SourcesViewModel>(
     override val binding by viewBinding(FragmentSourcesBinding::bind)
     override val viewModel: SourcesViewModel by viewModels()
 
-    private val everythingAdapter = SourcesCountryUsAdapter()
-
-    override fun initialize() {
-        viewModel.fetchSourcesCountryUs()
-    }
+    private val sourcesAdapter = SourcesCountryUsAdapter()
 
     override fun setupRequests() {
         fetchSourcesCountryUs()
@@ -40,26 +37,30 @@ class SourcesFragment : BaseFragment<FragmentSourcesBinding, SourcesViewModel>(
     }
 
     private fun loadStateListener() {
-        everythingAdapter.addLoadStateListener {
-            binding.swipeSourcesCountry.isRefreshing = it.refresh == LoadState.Loading
+        sourcesAdapter.addLoadStateListener {
+            try {
+                binding.swipeSourcesCountry.isRefreshing = it.refresh == LoadState.Loading
+            } catch (e: IllegalStateException) {
+                Log.e("anime", "$e")
+            }
         }
     }
 
     private fun listenerSwipe() {
         binding.swipeSourcesCountry.setOnRefreshListener {
-            everythingAdapter.refresh()
+            sourcesAdapter.refresh()
         }
     }
 
     private fun setupRecycler() = with(binding.rv) {
         layoutManager = LinearLayoutManager(requireContext())
-        adapter = everythingAdapter
+        adapter = sourcesAdapter
     }
 
     private fun fetchSourcesCountryUs() {
         lifecycleScope.launch {
             viewModel.fetchSourcesCountryUs().collectLatest {
-                everythingAdapter.submitData(it)
+                sourcesAdapter.submitData(it)
             }
         }
     }

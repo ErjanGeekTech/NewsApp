@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.fragments.topheadlines
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -22,10 +23,6 @@ class TopHeadlinesFragment : BaseFragment<FragmentTopHeadlinesBinding, TopHeadli
 
     private val everythingAdapter = EverythingAdapter()
 
-    override fun initialize() {
-        viewModel.fetchTopHeadlines()
-    }
-
     override fun setupRequests() {
         fetchTopHeadlines()
     }
@@ -41,7 +38,11 @@ class TopHeadlinesFragment : BaseFragment<FragmentTopHeadlinesBinding, TopHeadli
 
     private fun loadStateListener() {
         everythingAdapter.addLoadStateListener {
-            binding.swipeHeadlines.isRefreshing = it.refresh == LoadState.Loading
+            try {
+                binding.swipeHeadlines.isRefreshing = it.refresh == LoadState.Loading
+            } catch (e: IllegalStateException) {
+                Log.e("anime", "$e")
+            }
         }
     }
 
