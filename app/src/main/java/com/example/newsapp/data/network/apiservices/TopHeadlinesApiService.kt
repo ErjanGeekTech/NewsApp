@@ -1,15 +1,15 @@
 package com.example.newsapp.data.network.apiservices
 
-import com.example.newsapp.models.EverythingModel
-import com.example.newsapp.models.NewsResponse
+import com.example.newsapp.data.dtos.models.EverythingModelDto
+import com.example.newsapp.data.dtos.models.NewsResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface TopHeadlinesApiService {
 
-    @GET("/v2/top-headlines?apiKey=cee5ca142bd84c8b8975076757814681")
+    @GET("/v2/top-headlines?apiKey=ebe66846f18e453885e497d3f5015df5")
     suspend fun fetchTopHeadlines(
         @Query("country") query: String,
         @Query("page") page: Int
-    ): NewsResponse<EverythingModel>
+    ): NewsResponseDto<EverythingModelDto>
 }
