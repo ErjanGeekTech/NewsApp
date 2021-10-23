@@ -1,5 +1,7 @@
 package com.example.newsapp.extensions
 
+import androidx.recyclerview.widget.RecyclerView
+import com.example.newsapp.base.BaseFetchRequest
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,3 +21,15 @@ fun dateFormatTime(oldStringDate: String?): String? {
 
 private fun getCountry(): String =
     Locale.getDefault().country.lowercase(Locale.ROOT)
+
+fun RecyclerView.scrollListenerUploadNextPage(viewModel: BaseFetchRequest) {
+    this.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                viewModel.page++
+                viewModel.fetchNews(viewModel.page)
+            }
+        }
+    })
+}
