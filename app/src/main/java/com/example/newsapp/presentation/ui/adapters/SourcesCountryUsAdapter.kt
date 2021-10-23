@@ -1,15 +1,15 @@
-package com.example.newsapp.ui.adapters
+package com.example.newsapp.presentation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.base.BaseDiffUtilItemCallback
 import com.example.newsapp.databinding.ItemSourcesCountryUsBinding
-import com.example.newsapp.models.Sources
+import com.example.newsapp.domain.models.Sources
 
 class SourcesCountryUsAdapter :
-    PagingDataAdapter<Sources, SourcesCountryUsAdapter.SourcesCountryUsViewHolder>(
+    ListAdapter<Sources, SourcesCountryUsAdapter.SourcesCountryUsViewHolder>(
         BaseDiffUtilItemCallback<Sources>()
     ) {
 
