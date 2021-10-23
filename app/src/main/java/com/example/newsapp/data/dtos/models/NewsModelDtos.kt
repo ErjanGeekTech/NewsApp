@@ -1,65 +1,65 @@
-package com.example.newsapp.models
+package com.example.newsapp.data.dtos.models
 
 import com.example.newsapp.base.IBaseDiffModel
 import com.google.gson.annotations.SerializedName
 
 
-data class EverythingModel(
+data class EverythingModelDto(
 
     @SerializedName("source")
-    val source: Source,
+    val source: SourceDto?,
 
     @SerializedName("author")
-    val author: String,
+    val author: String?,
 
     @SerializedName("title")
-    val title: String,
+    val title: String?,
 
     @SerializedName("description")
-    val description: String,
+    val description: String?,
 
     @SerializedName("url")
-    override val url: String,
+    override val url: String?,
 
     @SerializedName("urlToImage")
-    val urlToImage: String,
+    val urlToImage: String?,
 
     @SerializedName("publishedAt")
-    val publishedAt: String,
+    val publishedAt: String?,
 
     @SerializedName("content")
-    val content: String,
+    val content: String?,
 ) : IBaseDiffModel
 
-data class Source(
+data class SourceDto(
 
     @SerializedName("id")
-    var id: String,
+    var id: String?,
 
     @SerializedName("name")
-    var name: String
+    var name: String?
 )
 
-data class Sources(
+data class SourcesDto(
 
     @SerializedName("id")
-    val id: String,
+    val id: String?,
 
     @SerializedName("name")
-    val name: String,
+    val name: String?,
 
     @SerializedName("description")
-    val description: String,
+    val description: String?,
 
     @SerializedName("url")
-    override val url: String,
+    override val url: String?,
 
     @SerializedName("category")
-    val category: String,
+    val category: String?,
 
     @SerializedName("language")
-    val language: String,
+    val language: String?,
 
     @SerializedName("country")
-    val country: String
+    val country: String?
 ) : IBaseDiffModel
